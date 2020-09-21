@@ -15,7 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.views.generic import TemplateView
+
+from books import views
+
 
 urlpatterns = [
+    path('', TemplateView.as_view(template_name='index.html'), name='home'),
+    path('books/', views.book_list, name='book_list'),
+    path('books/create/', views.book_create, name='book_create'),
+    path('books/<int:pk>/update/', views.book_update, name='book_update'),
+    path('books/<int:pk>/delete/', views.book_delete, name='book_delete'),
+
     path('admin/', admin.site.urls),
 ]
